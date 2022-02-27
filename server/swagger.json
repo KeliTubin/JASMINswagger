@@ -1,0 +1,34 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Jasmin",
+        "description": "Project Jasmin API documentation",
+        "version": "1.0.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "schemes": ["http"],
+    
+    "paths": {
+        "/get-breeds": {
+            "tags": ["CRUD breeds"],
+            "summary": "Breeds from MongoDB",
+            "produces": "application/json",
+            "responses": {
+                "200": {
+                    "description": "Breeds displayed successfully!",
+                    "schema": {
+                        "$ref": "#/definition/Breeds"
+                    }
+                }
+            }
+        }
+    },
+    "definition": {
+        "Breeds": {
+            "type": "object",
+            "$ref": "#/definition/Breeds"
+        }
+    }
+}
+

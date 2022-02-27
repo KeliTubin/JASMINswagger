@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-  console.log("dsdsds");
+  console.log("token in router index.js");
   next();
 });
 
