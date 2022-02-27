@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 4111
 const routes = require("./router")
-
+const breedsRouter = require("../routes/breeds");
 
 
 const router = express.Router();
@@ -14,10 +14,9 @@ app.use(
 );
 
 const swaggerUi = require("swagger-ui-express"),
-  swaggerDoc = require("./swagger.json");
+    swaggerDoc = require("./swagger.json");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use("/api/v1", router);
-
 
 
 const bodyParser = require("body-parser");
@@ -25,6 +24,7 @@ const db = require("./dbConnection");
 
 const expressJwt = require("express-jwt");
 const { SECRET } = require("./config");
+
 
 
 app.use(
@@ -39,9 +39,14 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send('Breeds for API v.1.0.0')
 });
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
 
 app.use("/api", routes)
+
+app.db = db;
+app.use("/breeds", breedsRouter);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

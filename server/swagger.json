@@ -8,27 +8,38 @@
     "host": "localhost:8080",
     "basePath": "/api",
     "schemes": ["http"],
+    "produces": ["application/json"],
     
     "paths": {
-        "/get-breeds": {
-            "tags": ["CRUD breeds"],
-            "summary": "Breeds from MongoDB",
-            "produces": "application/json",
-            "responses": {
-                "200": {
-                    "description": "Breeds displayed successfully!",
-                    "schema": {
-                        "$ref": "#/definition/Breeds"
+        "/Breeds": {
+            "get": {
+                "tags": ["Breeds"],
+                "summary": "Breeds from MongoDB",
+                "responses": {
+                    "200": {
+                        "description": "Breeds displayed successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/Breeds"
+                        }
                     }
                 }
-            }
+            }                
         }
     },
     "definition": {
         "Breeds": {
-            "type": "object",
-            "$ref": "#/definition/Breeds"
+            "required": ["Breed"],
+            "properties": {
+                "Breed":{
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
         }
+    },
+    "Breeds": {
+        "type": "array",
+        "$ref": "#/definition/Breeds"
     }
 }
 
