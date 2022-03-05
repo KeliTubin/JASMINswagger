@@ -1,22 +1,12 @@
 {
-    "schemes": [
-        "http"
-    ],
     "swagger": "2.0",
     "info": {
         "title": "Jasmin",
         "description": "Project Jasmin API documentation",
-        "termsOfService": "http://localhost:8080/",
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "http://localhost:8080/",
-            "variables": {}
-        }
-    ],
-    "host": "http://localhost:8080/",
-    "basePath": "/api",
+    "host": "localhost:8080/",
+    "basePath": "",
     "produces": ["application/json"],
     
     "paths": {
@@ -49,7 +39,7 @@
                 }
             }                
         },
-        "/ONEbreed": {
+        "/breed": {
             "get": {
                 "tags": ["SEARCH BREED"],
                 "summary": "One dog breed from MongoDB",
