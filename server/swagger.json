@@ -1,31 +1,157 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
         "title": "Jasmin",
         "description": "Project Jasmin API documentation",
+        "termsOfService": "http://localhost:4111",
         "version": "1.0.0"
     },
-    "host": "localhost:8080",
+    "servers": [
+        {
+            "url": "http://localhost:4111",
+            "variables": {}
+        }
+    ],
+    "host": "http://localhost:4111",
     "basePath": "/api",
-    "schemes": ["http"],
     "produces": ["application/json"],
     
     "paths": {
-        "/Breeds": {
+        "/ALLbreeds": {
             "get": {
-                "tags": ["Breeds"],
-                "summary": "Breeds from MongoDB",
+                "tags": ["SEARCH BREED"],
+                "summary": "All dog breeds from MongoDB",
+                "description": "Breeds from MongoDB",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "All dogs",
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 16
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Breeds displayed successfully!",
+                        "description": "All dog breeds from MongoDB are displayed successfully!",
                         "schema": {
-                            "$ref": "#/definitions/Breeds"
+                            "$ref": "#/components/Breeds"
+                        }
+                    }
+                }
+            }                
+        },
+        "/ONEbreed": {
+            "get": {
+                "tags": ["SEARCH BREED"],
+                "summary": "One dog breed from MongoDB",
+                "description": "Breed from MongoDB",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "All dogs",
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 16
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All dog breeds from MongoDB are displayed successfully!",
+                        "schema": {
+                            "$ref": "#/components/Breeds"
+                        }
+                    }
+                }
+            }                
+        },
+        "/ADDbreed": {
+            "post": {
+                "tags": ["ADD BREEDS"],
+                "summary": "Add new dog breed to DB",
+                "description": "New breed to DB",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "All dogs",
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 16
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New dog breed added to DB successfully!",
+                        "schema": {
+                            "$ref": "#/components/Breeds"
+                        }
+                    }
+                }
+            }                
+        },
+        "/DELETEbreed": {
+            "delete": {
+                "tags": ["DELETE BREED"],
+                "summary": "Delete dog breed DB",
+                "description": "Dog breed deletion",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "All dogs",
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 16
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dog breed deleted from DB successfully!",
+                        "schema": {
+                            "$ref": "#/components/Breeds"
                         }
                     }
                 }
             }                
         }
     },
+
+    "securitySchemes": {
+        "BearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "in": "header",
+            "bearerFormat": "JWT"
+        }
+},
+
+    "security": [
+        {
+            "BearerAuth": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbGlAdGVzdC5lZSIsImlhdCI6MTY0NTk4OTQ1MiwiZXhwIjoxNjQ1OTkzMDUyfQ.o7gW4ag7ndZKpLsUaSrtD7sJDzOhKzWWBL7NEPHcSdk"]
+        }
+    ],
     "definition": {
         "Breeds": {
             "required": ["Breed"],
@@ -37,9 +163,11 @@
             }
         }
     },
+    
     "Breeds": {
         "type": "array",
         "$ref": "#/definition/Breeds"
     }
+   
 }
 
