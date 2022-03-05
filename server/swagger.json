@@ -6,16 +6,16 @@
     "info": {
         "title": "Jasmin",
         "description": "Project Jasmin API documentation",
-        "termsOfService": "http://localhost:4111",
+        "termsOfService": "http://localhost:8080/",
         "version": "1.0.0"
     },
     "servers": [
         {
-            "url": "http://localhost:4111",
+            "url": "http://localhost:8080/",
             "variables": {}
         }
     ],
-    "host": "http://localhost:4111",
+    "host": "http://localhost:8080/",
     "basePath": "/api",
     "produces": ["application/json"],
     
