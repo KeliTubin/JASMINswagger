@@ -4,14 +4,18 @@
         "title": "Jasmin",
         "description": "Project Jasmin API documentation",
         "version": "1.0.0"
-
     },
-    "host": "localhost:8080/",
-    "basePath": "",
-    "produces": ["application/json"],
+    "servers":[
+        {
+            "url": "http://localhost:8080/",
+            "variables": {}
+        }
+    ],
+    
+
     
     "paths": {
-        "/ALLbreeds": {
+        "/api/get-breeds-list": {
             "get": {
                 "tags": ["SEARCH BREED"],
                 "summary": "Get all dog breeds request.",
@@ -26,28 +30,35 @@
                 }
             }                
         },
-        "/ONEbreed": {
+        "/api/get-breeds-list/{:id}": {
             "get": {
                 "tags": ["SEARCH BREED"],
                 "summary": "Get one dog breed request.",
                 "description": "Here you can create get one dog breed request.",
                 "parameters": [
                     {
-                        "name": "limit",
-                        "in": "query",
-                        "description": "All dogs",
-                        "style": "form",
-                        "explode": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Dog breed name",
+                        "required": true,
+                        "style": "simple",
                         "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 16
-                        }
+                            "type": "string"
+                        },
+                        "example": "1a0ec8d6b99ca550590849d"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "One dog breed get request SUCCESSED!"
+                        "description": "One dog breed get request SUCCESSED!",
+                        "headers": {},
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/breeds_schema"
+                                }
+                            }
+                        }
                     },
                     "500": {
                         "description": "One dog breed get request FAILED!"
@@ -62,16 +73,74 @@
                 "description": "Here you can create add dog breed request.",
                 "parameters": [
                     {
-                        "name": "limit",
+                        "name": "Breed",
                         "in": "query",
-                        "description": "All dogs",
+                        "description": "Dog breed name",
                         "style": "form",
-                        "explode": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 16
-                        }
+                        "explode": true
+                    },
+                    {
+                        "name": "Short Description",
+                        "in": "query",
+                        "description": "Short Description of dog breed",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Characteristics",
+                        "in": "query",
+                        "description": "Dog breed haracteristics",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Origin",
+                        "in": "query",
+                        "description": "Dog breed origin",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Nature",
+                        "in": "query",
+                        "description": "Nature of dog breed",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Health",
+                        "in": "query",
+                        "description": "Dog breed health related info",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Movement",
+                        "in": "query",
+                        "description": "Dog breed movement needs",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Nutrition",
+                        "in": "query",
+                        "description": "Dog breed specific nutrition",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Maintenance",
+                        "in": "query",
+                        "description": "Dog breed maintenance info",
+                        "style": "form",
+                        "explode": true
+                    },
+                    {
+                        "name": "Children",
+                        "in": "string",
+                        "description": "Dog breed match with children",
+                        "style": "string",
+                        "explode": true
                     }
                 ],
                 "responses": {
@@ -126,12 +195,15 @@
 
     "security": [
         {
-            "BearerAuth": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbGlAdGVzdC5lZSIsImlhdCI6MTY0NTk4OTQ1MiwiZXhwIjoxNjQ1OTkzMDUyfQ.o7gW4ag7ndZKpLsUaSrtD7sJDzOhKzWWBL7NEPHcSdk"]
+            "BearerAuth": [],
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbGlAdGVzdC5lZSIsImlhdCI6MTY0NTk4OTQ1MiwiZXhwIjoxNjQ1OTkzMDUyfQ.o7gW4ag7ndZKpLsUaSrtD7sJDzOhKzWWBL7NEPHcSdk"
+
         }
     ],
     "definition": {
         "Breed": {
             "required": [
+                "_id",
                 "Breed", 
                 "Short Description",
                 "Characteristics",
@@ -144,6 +216,10 @@
                 "Children"
             ],
             "properties": {
+                "id":{
+                    "type": "string",
+                    "uniqueItems": true
+                },
                 "Breed":{
                     "type": "string",
                     "uniqueItems": true

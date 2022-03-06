@@ -92,9 +92,9 @@ const router = express.Router();
 	const breeds = req.app.db.get("get-breeds");
 
 	res.send(breeds);
-});
+})
 
-router.get("/get-breed/:id", (req, res) => {
+router.get("/get-breeds/:id", (req, res) => {
 	const dog = req.app.db.get("get-breeds").find({id: req.params.id}).value()
 	res.send(dog);
 })

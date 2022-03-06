@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { Jasmin } = require("./dbConnection");
-const { Todos } = require("./dbConnection");
 const authRoutes = require("./authenticate.router");
 
 router.use("/auth", authRoutes);
