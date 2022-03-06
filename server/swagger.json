@@ -4,6 +4,7 @@
         "title": "Jasmin",
         "description": "Project Jasmin API documentation",
         "version": "1.0.0"
+
     },
     "host": "localhost:8080/",
     "basePath": "",
@@ -13,37 +14,23 @@
         "/ALLbreeds": {
             "get": {
                 "tags": ["SEARCH BREED"],
-                "summary": "All dog breeds from MongoDB",
-                "description": "Breeds from MongoDB",
-                "parameters": [
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "description": "All dogs",
-                        "style": "form",
-                        "explode": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 16
-                        }
-                    }
-                ],
+                "summary": "Get all dog breeds request.",
+                "description": "Here you can create get all dog breeds request.",
                 "responses": {
                     "200": {
-                        "description": "All dog breeds from MongoDB are displayed successfully!",
-                        "schema": {
-                            "$ref": "#/components/Breeds"
-                        }
+                        "description": "All dog breeds get request SUCCESSED!"
+                    },
+                    "500": {
+                        "description": "All dog breeds get request FAILED!"
                     }
                 }
             }                
         },
-        "/breed": {
+        "/ONEbreed": {
             "get": {
                 "tags": ["SEARCH BREED"],
-                "summary": "One dog breed from MongoDB",
-                "description": "Breed from MongoDB",
+                "summary": "Get one dog breed request.",
+                "description": "Here you can create get one dog breed request.",
                 "parameters": [
                     {
                         "name": "limit",
@@ -60,10 +47,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "All dog breeds from MongoDB are displayed successfully!",
-                        "schema": {
-                            "$ref": "#/components/Breeds"
-                        }
+                        "description": "One dog breed get request SUCCESSED!"
+                    },
+                    "500": {
+                        "description": "One dog breed get request FAILED!"
                     }
                 }
             }                
@@ -71,8 +58,8 @@
         "/ADDbreed": {
             "post": {
                 "tags": ["ADD BREEDS"],
-                "summary": "Add new dog breed to DB",
-                "description": "New breed to DB",
+                "summary": "Add dog breed request.",
+                "description": "Here you can create add dog breed request.",
                 "parameters": [
                     {
                         "name": "limit",
@@ -89,10 +76,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "New dog breed added to DB successfully!",
-                        "schema": {
-                            "$ref": "#/components/Breeds"
-                        }
+                        "description": "Dog breed post request SUCCESSED!"
+                    },
+                    "500": {
+                        "description": "Dog breed post request FAILED!"
                     }
                 }
             }                
@@ -100,8 +87,8 @@
         "/DELETEbreed": {
             "delete": {
                 "tags": ["DELETE BREED"],
-                "summary": "Delete dog breed DB",
-                "description": "Dog breed deletion",
+                "summary": "Delete dog breed request.",
+                "description": "Here you can create delete dog breed request.",
                 "parameters": [
                     {
                         "name": "limit",
@@ -118,10 +105,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Dog breed deleted from DB successfully!",
-                        "schema": {
-                            "$ref": "#/components/Breeds"
-                        }
+                        "description": "Dog breed delete request SUCCESSED!"
+                    },
+                    "500": {
+                        "description": "Dog breed delete request FAILED!"
                     }
                 }
             }                
@@ -135,7 +122,7 @@
             "in": "header",
             "bearerFormat": "JWT"
         }
-},
+    },
 
     "security": [
         {
@@ -143,20 +130,57 @@
         }
     ],
     "definition": {
-        "Breeds": {
-            "required": ["Breed"],
+        "Breed": {
+            "required": [
+                "Breed", 
+                "Short Description",
+                "Characteristics",
+                "Origin",
+                "Nature",
+                "Health",
+                "Movement",
+                "Nutrion",
+                "Maintenance",
+                "Children"
+            ],
             "properties": {
                 "Breed":{
                     "type": "string",
                     "uniqueItems": true
+                },
+                "Short Description": {
+                    "type": "string"
+                },
+                "Characteristics":{
+                    "type": "string"
+                },
+                "Origin": {
+                    "type": "string"
+                },
+                "Nature": {
+                    "type": "string"
+                },
+                "Health": {
+                    "type": "string"
+                },
+                "Movement": {
+                    "type": "string"
+                },
+                "Nutrition": {
+                    "type": "string"
+                },
+                "Maintenance": {
+                    "type": "string"
+                },
+                "Children": {
+                    "type": "string"
                 }
             }
         }
     },
     
     "Breeds": {
-        "type": "array",
-        "$ref": "#/definition/Breeds"
+        "type": "array"
     }
    
 }
